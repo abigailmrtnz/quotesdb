@@ -39,16 +39,17 @@ if(!isset($data->id) || !isValid($data->id, $quote)) {
 }
 
 //Delete Quote
+try {
+    $quote->delete();
+    echo json_encode(array('id' => $quote->id));
+} catch (PDOException $e) {
+    echo json_encode(array("error" => "{$e->getMessage()}"));
+}
+/*
 if (!$quote->delete()) {
     echo json_encode(array('message' => 'No Quotes Found'));
     exit();
 } else {
     echo json_encode(array('id' => $quote->id));
-}
-/* try {
-    $quote->delete();
-    echo json_encode(array('id' => $quote->id));
-} catch (PDOException $e) {
-    echo json_encode(array("error" => "{$e->getMessage()}"));
 } */
 ?>
