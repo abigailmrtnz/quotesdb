@@ -25,29 +25,36 @@ if (!isset($data->id) || !isset($data->quote) || !isset($data->author_id) || !is
     exit();
 }
 
-//Set IDs to update
-$quote->id = $data->id;
+// Determine Whether author ID is Valid. Print an error message and exit if not.
+$author = new Author($db);
+if(!isValid($data->author_id, $author)) {
+        echo(json_encode(array('message' => 'author_id Not Found')));
+        $author = null;
+        exit();
+}
+
+// Determine Whether category ID is Valid. Print an error message and exit if not.
+$category = new Category($db);
+    if(!isValid($data->category_id, $category)) {
+        echo(json_encode(array('message' => 'category_id Not Found')));
+        $category = null;
+        exit();
+}
+
+// Assign Input from User to the New Quote
 $quote->quote = $data->quote;
 $quote->author_id = $data->author_id;
 $quote->category_id = $data->category_id;
 
-//Validates author
-if (!isValid($quote->author_id, $id)) {
-    echo json_encode(array('message' => 'author_id Not Found'));
-    exit();
+// Create Quote
+try {
+    $quote_object->create();
+    echo json_encode(array(
+            'id' => $quote->id,
+            'quote' => $quote->quote,
+            'author_id' => $quote->author_id,
+            'category_id' => $quote->category_id));
+} catch(PDOException $e) {
+// This code executes if the call to create() fails.
+    echo json_encode(array("error" => "{$e->getMessage()}"));
 }
-
-//Validates category
-if (!isValid($quote->category_id, $id)) {
-    echo json_encode(array('message' => 'category_id Not Found'));
-    exit();
-}
-
-
-//Create category
-if ($quote->create()) {
-    echo json_encode(array('id' => $quote->id, 'quote' => $quote->quote, 'author_id' => $quote->author_id, 'category_id' => $quote->category_id));
-} else {
-    echo json_encode(array('message' => 'No Quotes Found'));
-}
-?>
