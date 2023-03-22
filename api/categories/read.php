@@ -25,6 +25,7 @@ $num = $result->rowCount();
 if($num > 0) {
 //category array
 	$category_arr = array();
+	$author_arr['data'] = array();
 
 	while($row = $result->fetch(PDO::FETCH_ASSOC)){
 		extract($row);
