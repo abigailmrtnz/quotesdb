@@ -19,8 +19,10 @@ class Author {
         $query = "SELECT
         id,
         author
-        FROM ".$this->table."
-        ORDER BY id ASC";
+        FROM 
+        ".$this->table."
+        ORDER BY 
+        id ASC";
         
         //Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -42,21 +44,20 @@ class Author {
         
         //Prepare statement
         $stmt = $this->conn->prepare($query);
-        //Clean data
-        $this->id = htmlspecialchars(strip_tags($this->id));
+/*         //Clean data
+        $this->id = htmlspecialchars(strip_tags($this->id)); */
         //Bind data
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
         // Retrieve data from query set into variables
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $numRow = $stmt->rowCount();
+
         if($numRow > 0){
             $this->id = $row['id'];
             $this->author = $row['author'];
-            return true;
-        }
-            return false;
-    }
+    } return $numRow;
+}
 
     //Create Author       
     public function create() {
@@ -76,8 +77,7 @@ class Author {
         if ($stmt->execute()) { 
             $this->id = $this->conn->lastInsertId();
             return true;
-        }     
-        else {
+        } else {
             printf("Error: %s. \n", $stmt->error);
             return false;
         }     

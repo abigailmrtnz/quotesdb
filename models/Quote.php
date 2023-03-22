@@ -32,31 +32,29 @@ class Quote {
         LEFT JOIN
         authors a ON p.author_id = a.id";
 
-        if(!empty($this->author_id) && !empty($this->category_id)) {
+        if(!isset($this->author_id) && !isset($this->category_id)) {
             $query .= "WHERE
             p.author_id = :author_id
             AND
             p.category_id = :category_id";
-        } else if(!empty($this->author_id)) {
-            $query .= "WHERE
+        } else if(!isset($this->author_id)) {
+            $query .= " WHERE
             p.author_id = :author_id";
-        } else if(!empty($this->category_id)) {
-            $query .= "WHERE
+        } else if(!isset($this->category_id)) {
+            $query .= " WHERE
             p.category_id = :category_id";
         }
-
-        $query .= " ORDER BY
-        p.id";
-
+        $query .= " ORDER BY p.id";
         $stmt = $this->conn->prepare($query);
 
-        if(!empty($this->author_id) && !empty($this->category_id)) {
+        if(!isset($this->author_id) && !isset($this->category_id)) {
             $stmt->bindParam(':author_id', $this->author_id);
-            $stmt->bindParam(':category_id', $this->category_id);            
-        } else if(!empty($this->category_id)) {
-            $stmt->bindParam(':category_id', $this->category_id);            
+            $stmt->bindParam(':category_id', $this->category_id);
+        } else if(!isset($this->author_id)) {
+            $stmt->bindParam(':author_id', $this->author_id);
+        } else if(!isset($this->category_id)) {
+            $stmt->bindParam(':category_id', $this->category_id);
         }
-
         //Execute query
         $stmt->execute();
         return $stmt;

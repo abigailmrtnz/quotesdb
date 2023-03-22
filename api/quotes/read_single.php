@@ -21,14 +21,14 @@ if (isset($_GET['id'])){
     $quote->id = isset($_GET['id']) ? $_GET['id'] : die();
     $quote->read_singleQuote();
 
-    if ($quote->quote !== null) {
-        $quote_arr = array(
-            'id' => $quote->id,
-            'quote' => $quote->quote,
-            'author' => $quote->author,
-            'category' => $quote->category);
+if ($quote->quote !== null) {
+    $quote_arr = array(
+    'id' => $quote->id,
+    'quote' => $quote->quote,
+    'author' => $quote->author,
+    'category' => $quote->category);
             
-            echo json_encode($quote_arr, JSON_NUMERIC_CHECK);
+    echo json_encode($quote_arr, JSON_NUMERIC_CHECK);
     } else {
         echo json_encode(array('message' => 'No Quotes Found'));
     }

@@ -20,7 +20,7 @@ $quote = new Quote($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //creates post or outputs error message for missing parameters
-if (!isset($data->id) || !isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
+if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
     exit();
 }
@@ -29,11 +29,24 @@ if (!isset($data->id) || !isset($data->quote) || !isset($data->author_id) || !is
 $quote->quote = $data->quote;
 $quote->author_id = $data->author_id;
 $quote->category_id = $data->category_id;
+
+//Validates author
+if (!isValid($quote->author_id, $quote)) {
+    echo json_encode($no_author);
+    exit();
+}
+
+//Validates category
+if (!isValid($quote->category_id, $quote)) {
+    echo json_encode($no_category);
+    exit();
+}
+
+
 //Create category
 if ($quote->create()) {
     echo json_encode(array('id' => $quote->id, 'quote' => $quote->quote, 'author_id' => $quote->author_id, 'category_id' => $quote->category_id));
 } else {
     echo json_encode(array('message' => 'No Quotes Found'));
 }
-
 ?>

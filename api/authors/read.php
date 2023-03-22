@@ -16,8 +16,6 @@ $db = $database->connect();
 // Instantiate author object
 $author = new Author($db);
 
-
-// Author read query
 $result = $author->readAuthors();
 
 //Get row count
@@ -27,7 +25,6 @@ $num = $result->rowCount();
 if($num > 0) {
 //author array
 	$author_arr = array();
-	$author_arr['data'] = array();
 
 	while($row = $result->fetch(PDO::FETCH_ASSOC)){
 		extract($row);

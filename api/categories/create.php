@@ -13,7 +13,7 @@ include_once '../../functions/isValid.php';
 $database = new Database();
 $db = $database->connect();
 
-//Instantiate object
+//category object
 $category = new Category($db);
 
 // Get raw posted data
@@ -26,7 +26,7 @@ if (!isset($data->category)) {
 }
 //Set ID to update
 $category->category = $data->category;
-//Create author
+//Create category
 if ($category->create()) {
     echo json_encode(array('id' => $category->id, 'category' => $category->category));
 } else { //error is category not created

@@ -13,7 +13,7 @@ include_once '../../functions/isValid.php';
 $database = new Database();
 $db = $database->connect();
 
-//Instantiate object
+//author object
 $author = new Author($db);
 
 // Get raw posted data

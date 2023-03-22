@@ -20,8 +20,8 @@ $category = new Category($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //if parameters missing, outputs error message
-if (!isset($data->category)) {
-    echo json_encode(array('message' => 'Missing Required Parameters'));
+if(!isset($data->id) || !isValid($data->id, $category)) {
+    echo(json_encode(array('message' => 'category_id Not Found')));
     exit();
 }
 

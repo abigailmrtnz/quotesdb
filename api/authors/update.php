@@ -32,16 +32,18 @@ if(!isset($data->author)) {
     exit();
 }
 
-if(!get_object_vars($data) || !isset($data->id) || !isset($data->author)){ //If there are no parameters
-    echo json_encode(array('message' => 'Missing Required Parameters'));
-} else {
-    //Set ID to update
-    $author->id = $data->id;
-    $author->author = $data->author;
+//Set ID to update
+$author->id = $data->id;
+$author->author = $data->author;
 
-    //Update post
-    if(!$author->update()){
-        echo json_encode(array('message' => 'Author Not Updated'));
-    }
+if (!$author->update()) {
+	echo json_encode(array('message' => 'author_id Not Found'));
+	exit();
+
+} else if ($author->update()) {
+	echo json_encode(array('id' => $author->id, 'author' => $author->author));
+
+} else {
+	echo json_encode(array('message' => 'Authors Not Updated'));
 }
 ?>

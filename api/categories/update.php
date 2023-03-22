@@ -32,16 +32,18 @@ if(!isset($data->category)) {
     exit();
 }
 
-if(!get_object_vars($data) || !isset($data->id) || !isset($data->category)){ //If there are no parameters
-    echo json_encode(array('message' => 'Missing Required Parameters'));
-} else {
-    //Set ID to update
-    $category->id = $data->id;
-    $category->category = $data->category;
+//Set ID to update
+$category->id = $data->id;
+$category->category = $data->category;
 
-    //Update post
-    if(!$category->update()){
-        echo json_encode(array('message' => 'Category Not Updated'));
-    }
+if (!$category->update()) {
+	echo json_encode(array('message' => 'category_id Not Found'));
+	exit();
+
+} else if ($category->update()) {
+	echo json_encode(array('id' => $category->id, 'category' => $category->category));
+
+} else {
+	echo json_encode(array('message' => 'Categories Not Updated'));
 }
 ?>

@@ -20,8 +20,8 @@ $author = new Author($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //if parameters missing, outputs error message
-if (!isset($data->author)) {
-    echo json_encode(array('message' => 'Missing Required Parameters'));
+if(!isset($data->id) || !isValid($data->id, $author)) {
+    echo(json_encode(array('message' => 'author_id Not Found')));
     exit();
 }
 
