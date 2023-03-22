@@ -23,6 +23,22 @@ $data = json_decode(file_get_contents("php://input"));
 //Set ID
 $quote->id = $data->id;
 
+if (!isset($data->id)) {
+    echo json_encode(array('message' => 'Missing Required Parameters'));
+    exit();
+}
+
+//no quote found error message
+if ($quote->delete()) {
+    echo json_encode(array('message' => 'No Quotes Found'));
+    exit();
+} else {
+    echo json_encode(array('id' => $quote->id));
+}
+
+
+
+
 /*//Delete quote or output error
 if(!get_object_vars($data) || !isset($data->id)) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
@@ -34,18 +50,17 @@ if(!get_object_vars($data) || !isset($data->id)) {
     }
 }*/
 
-if(!isset($data->id) || !isValid($data->id, $quote)) {
+/* if(!isset($data->id) || !isValid($data->id, $quote)) {
     echo(json_encode(array('message' => 'Not Quotes Found')));
     exit ();
 }
-
 //Delete Quote
 try {
     $quote->delete();
     echo json_encode(array('id' => $quote->id));
 } catch (PDOException $e) {
     echo json_encode(array("error" => "{$e->getMessage()}"));
-}
+} */
 /*
 if (!$quote->delete()) {
     echo json_encode(array('message' => 'No Quotes Found'));
