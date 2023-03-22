@@ -24,7 +24,7 @@ if (!isValid($category->id, $category)) {
     exit();
 }
 
-$category->read_singleCategory();
+$category->read_single();
 
 //Get category or output error message
 $category_arr = array('id' => $category->id, 'category' => $category->category);

@@ -14,7 +14,7 @@ class Author {
     }
 
     //Get authors
-    public function readAuthors() {
+    public function read() {
         //Create query
         $query = "SELECT
         id,
@@ -32,7 +32,7 @@ class Author {
     }
 
     //Get Single Author
-    public function read_singleAuthor(){
+    public function read_single(){
         //Create query
         $query = "SELECT
         id,

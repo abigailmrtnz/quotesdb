@@ -16,7 +16,7 @@ $db = $database->connect();
 // Instantiate author object
 $author = new Author($db);
 
-$result = $author->readAuthors();
+$result = $author->read();
 
 //Get row count
 $num = $result->rowCount();

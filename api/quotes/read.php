@@ -7,8 +7,8 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Methods, Content-Type
 
 include_once '../../config/Database.php';
 include_once '../../models/Quote.php';
+include_once '../..functions/Author.php';
 include_once '../../functions/isValid.php';
-
 
 // Instantiate DB & connect
 $database = new Database();
@@ -19,7 +19,7 @@ $quote = new Quote($db);
 $author = new Author($db);
 
 //Quote query
-$result = $quote->readQuotes();
+$result = $quote->read();
 
 //Get row count
 $num = $result->rowCount();

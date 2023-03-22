@@ -14,7 +14,7 @@ class Category {
     }
 
     //Get categories
-    public function readCategories() {
+    public function read() {
         //Create query
         $query = "SELECT
         id,
@@ -31,7 +31,7 @@ class Category {
     }
 
     //Get Single Category
-    public function read_singleCategory(){
+    public function read_single(){
         //Create query
         $query = "SELECT
         id,

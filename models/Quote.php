@@ -17,7 +17,7 @@ class Quote {
     }
 
     // Get Quotes
-    public function readQuotes() {
+    public function read() {
         // Create Select Query
         $query = "SELECT p.id,
         p.quote,
@@ -64,7 +64,7 @@ class Quote {
     }
 
     // Get Single Quote
-    public function read_singleQuote() {
+    public function read_single() {
         // Create Select Query
         $query = "SELECT p.id,
         p.quote,

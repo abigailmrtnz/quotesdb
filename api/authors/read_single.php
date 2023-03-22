@@ -24,7 +24,7 @@ if (!isValid($author->id, $author)) {
     exit();
 }
 
-$author->read_singleAuthor();
+$author->read_single();
 
 //Get Author or output error message
 $author_arr = array('id' => $author->id, 'author' => $author->author);

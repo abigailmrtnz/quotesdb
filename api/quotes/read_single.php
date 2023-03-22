@@ -7,6 +7,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Methods, Content-Type
 
 include_once '../../config/Database.php';
 include_once '../../models/Quote.php';
+include_once '../..functions/Author.php';
 include_once '../../functions/isValid.php';
 
 // Instantiate DB & connect
@@ -19,7 +20,7 @@ $quote = new Quote($db);
 //Get ID and validate
 if (isset($_GET['id'])){
     $quote->id = isset($_GET['id']) ? $_GET['id'] : die();
-    $quote->read_singleQuote();
+    $quote->read_single();
 
 if ($quote->quote !== null) {
     $quote_arr = array(
@@ -46,7 +47,7 @@ if ($quote->quote !== null) {
         }
     }
 
-    $quote_arr = $quote->read_singleQuote();
+    $quote_arr = $quote->read_single();
     echo json_encode($quote_arr, JSON_NUMERIC_CHECK);
 } else if (isset($_GET['category_id'])) {
     $quote->category_id = isset($_GET['category_id']) ? $_GET['category_id'] : die();
@@ -55,7 +56,7 @@ if ($quote->quote !== null) {
         echo json_encode(array('message' => 'category_id Not Found'));
         exit();
     }
-    $quote_arr = $quote->read_singleQuote();
+    $quote_arr = $quote->read_single();
     echo json_encode($quote_arr, JSON_NUMERIC_CHECK);
 }
 ?>

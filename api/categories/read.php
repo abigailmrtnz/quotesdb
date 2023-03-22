@@ -16,7 +16,7 @@ $db = $database->connect();
 // Instantiate category object
 $category = new Category($db);
 
-$result = $category->readCategories();
+$result = $category->read();
 
 //Get row count
 $num = $result->rowCount();
