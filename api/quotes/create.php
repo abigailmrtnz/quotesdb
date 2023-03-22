@@ -32,13 +32,13 @@ $quote->author_id = $data->author_id;
 $quote->category_id = $data->category_id;
 
 //Validates author
-if (!isValid($quote->author_id, $quote)) {
+if (!isValid($quote->author_id, $id)) {
     echo json_encode(array('message' => 'author_id Not Found'));
     exit();
 }
 
 //Validates category
-if (!isValid($quote->category_id, $quote)) {
+if (!isValid($quote->category_id, $id)) {
     echo json_encode(array('message' => 'category_id Not Found'));
     exit();
 }
