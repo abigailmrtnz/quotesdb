@@ -16,6 +16,7 @@ $db = $database->connect();
 
 //Instantiate Quote object
 $quote = new Quote($db);
+$author = new Author($db);
 
 //Quote query
 $result = $quote->readQuotes();
