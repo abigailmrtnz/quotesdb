@@ -7,7 +7,6 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Methods, Content-Type
 
 include_once '../../config/Database.php';
 include_once '../../models/Quote.php';
-include_once '../..functions/Author.php';
 include_once '../../functions/isValid.php';
 
 // Instantiate DB & connect
